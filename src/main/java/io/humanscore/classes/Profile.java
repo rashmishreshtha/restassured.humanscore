@@ -1,6 +1,6 @@
-package io.humanscore.interfaces;
+package io.humanscore.classes;
 
-public class IProfile {
+public class Profile {
     public String name;
     public String id;
     public String imagev;

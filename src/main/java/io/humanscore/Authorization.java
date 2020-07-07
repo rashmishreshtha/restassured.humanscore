@@ -1,6 +1,5 @@
 package io.humanscore;
 
-import io.humanscore.interfaces.IAuth;
 import io.restassured.response.Response;
 
 import java.util.HashMap;
