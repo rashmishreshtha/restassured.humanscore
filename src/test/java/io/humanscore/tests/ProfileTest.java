@@ -11,14 +11,14 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class ProfileTest {
-	Client cli = new Client();
+	Client cli = new Client("dfsgdsfS");
 	Authorization auth = new Authorization();
 	@Test
 	public void getProfileMix() {
 		try {
 			Response token = auth.GetAuth(Config.getProperty("user"), Config.getProperty("pwd"));
 			JSONObject jo = new JSONObject(token.asString());
-			Response resp = cli.get("/profile/mix", jo.getString("token"));
+			Response resp = cli.get("/profile/mix");
 			ValidationProfileMix assertProfileMix = new ValidationProfileMix();
 			assertProfileMix.checkStatus(resp, 200);
 			assertProfileMix.sla(resp, 5000);
@@ -35,7 +35,7 @@ public class ProfileTest {
 		try {
 			Response token = auth.GetAuth(Config.getProperty("user"), Config.getProperty("pwd"));
 			JSONObject jo = new JSONObject(token.asString());
-			Response resp = cli.get("/profile/5d559a931b22e01f3a5e6864", jo.getString("token"));
+			Response resp = cli.get("/profile/5d559a931b22e01f3a5e6864");
 			ValidationProfileMix assertProfileMix = new ValidationProfileMix();
 			assertProfileMix.checkStatus(resp, 200);
 			assertProfileMix.sla(resp, 5000);

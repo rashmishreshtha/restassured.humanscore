@@ -10,7 +10,7 @@ import java.io.File;
     @Test
     @CucumberOptions(
             plugin={"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"},
-            features = "src/test/resources/features/",
+            features = {"src/test/resources/features/register.feature"},
             monochrome = false,
             glue="io/humanscore/stepdefs/")
 

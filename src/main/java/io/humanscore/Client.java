@@ -14,6 +14,8 @@ import java.util.Properties;
 
 public class Client {
     static String baseurl;
+    private boolean auth = false;
+    public String token;
 
     public Client() {
         try {
@@ -23,22 +25,34 @@ public class Client {
         }
     }
 
+    public Client(String token) {
+        try {
+            baseurl = Config.getProperty("baseurl");
+            auth = true;
+            this.token = token;
+        } catch (IOException e) {
 
-
-    public Response get(String url) {
-        Response resp = RestAssured.given().get(baseurl + url);
-        resp.then().log().all();
-        return resp;
+        }
     }
 
-    public Response get(String url, String token) {
-        Response resp = RestAssured.given().header("Authorization", token).get(baseurl + url);
+    public Response get(String url) {
+        Response resp;
+        if (auth == true) {
+            resp = RestAssured.given().header("Authorization", token).get(baseurl + url);
+        } else {
+            resp = RestAssured.given().get(baseurl + url);
+        }
         resp.then().log().all();
         return resp;
     }
 
     public Response post(String url, Map<String, Object> payload) {
-        Response resp = RestAssured.given().body(payload).post(baseurl + url);
+        Response resp;
+        if (auth == true) {
+            resp = RestAssured.given().header("Authorization", token).body(payload).post(baseurl + url);
+        } else {
+            resp = RestAssured.given().body(payload).post(baseurl + url);
+        }
         resp.then().log().all();
         return resp;
     }
