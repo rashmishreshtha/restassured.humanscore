@@ -7,18 +7,18 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Config {
-    public Properties prop;
-    public String baseurl;
+    public static Properties prop;
+    public static String file;
 
-    public Config(String path) throws IOException {
-        this.prop = getPropertiesFromFile(path);
-        this.baseurl = this.prop.getProperty("baseurl");
+    public static void getPropertiesFromFile(String path) throws IOException {
+        InputStream file = new FileInputStream(path);
+        prop = new Properties();
+        prop.load(file);
     }
 
-    public Properties getPropertiesFromFile(String path) throws IOException {
-        InputStream file = new FileInputStream(path);
-        Properties _prop = new Properties();
-        _prop.load(file);
-        return _prop;
+    public static String getProperty (String str) throws IOException{
+        if (prop == null)
+            getPropertiesFromFile("./resources/dev.properties");
+        return prop.getProperty(str);
     }
 }
