@@ -5,7 +5,7 @@
     </listeners>
     <test name="Regression1"   >
         <classes>
-            <class name="io.humanscore.tests.ProfileTest"></class>
+            <class name="io.humanscore.runner.ProfileMixTest"></class>
         </classes>
     </test>
 </suite>

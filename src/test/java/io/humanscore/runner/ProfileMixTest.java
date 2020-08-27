@@ -11,8 +11,9 @@ import java.io.File;
 @Test
 @CucumberOptions(
         plugin={"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"},
-        features = {"src/test/resources/features/profileMix.feature",
+        features = {"src/test/resources/features/profile.feature",
                 "src/test/resources/features/login.feature",
+                "src/test/resources/features/registration.feature",
                 },
         monochrome = false,
         dryRun = false,

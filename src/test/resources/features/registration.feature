@@ -4,8 +4,9 @@ Feature: humanscore Registration
 
     Given registration information
       | name  | age | city  | country      | email          | password  |
-      | Punnu | 29  | Patna | Bihar, India | punu@gmail.com | pAssword1 |
-      | Ranu | 34  | Ranchi | Jharkhand, India | rannu@gmail.com | pAssword2 |
+      | Punnu | 29  | Patna | Bihar, India | *********gmail.com | *********** |
+      | Ranu | 34  | Ranchi | Jharkhand, India | ************@gmail.com | pAssword2 |
+      | Manu | 39  | Patna | Bihar, India | ***************@gmail.com | pAssword2 |
     When post is performed
     Then profile is created
 

@@ -4,6 +4,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import java.util.Date;
 import io.humanscore.Client;
 import io.restassured.response.Response;
 import org.json.JSONObject;
@@ -16,7 +17,9 @@ public class Authorization {
 	List<Map<String, Object>> logininfo;
 	Response resp;
 	public static String token;
-	
+	public static Date tokenCreationTime;
+	public static String profileId;
+
 	@Given("^login information is provided$")
 	public void login_information_is_provided(DataTable args2) {
 		logininfo = args2.asMaps(String.class, Object.class);
@@ -34,5 +37,7 @@ public class Authorization {
 		Assert.assertEquals(resp.statusCode(), 200);
 		JSONObject oauth = new JSONObject(resp.asString());
 		token = oauth.getString("token");
+		profileId = oauth.getJSONObject("profile").getString("id");
+		tokenCreationTime = new Date();
 	}
 }

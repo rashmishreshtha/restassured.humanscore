@@ -1,5 +1,6 @@
 package io.humanscore;
 
+import com.sun.rmi.rmid.ExecOptionPermission;
 import io.humanscore.common.Config;
 
 import static org.hamcrest.Matchers.*;
@@ -8,9 +9,12 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
+import io.humanscore.stepdefs.*;
 
 public class Client {
     static String baseurl;
@@ -31,6 +35,20 @@ public class Client {
             auth = true;
             this.token = token;
         } catch (IOException e) {
+        }
+    }
+
+    public void renewToken() {
+    }
+
+    public void checkToken(String token) {
+        Date currentTime = new Date();
+        long diff = Math.abs(currentTime.getTime() - Authorization.tokenCreationTime.getTime());
+        try {
+            if (diff - 5000 > Long.getLong(Config.getProperty("tokenExpiration"))) {
+                renewToken();
+            }
+        }catch(IOException exp){
 
         }
     }
